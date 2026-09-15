@@ -1,3 +1,4 @@
+import {storyScriptTask} from './story.mjs';
 import {narratorDirection} from './first-person.mjs';
 import {clapperScriptTask} from './clapper.mjs';
 // 听海主持人的口头表达：讲稿、双工和备用语音回答共用。
@@ -20,6 +21,7 @@ ${mode === 'episode'
 
 // 在一次讲稿调用中完成内容设计与写作；仅输出播放器需要的剧本。
 export function episodeScriptTask(ctx, style, depth) {
+  if(style==='story')return storyScriptTask(ctx,depth);
   if(style==='clapper')return clapperScriptTask(ctx,depth);
   const deep = depth === 'deep', duo = style === 'duo';
   return `你是听海的中文知识播客编剧。面向对主题好奇、没有专业基础的听众，创作一档完整、可直接朗读的节目。
