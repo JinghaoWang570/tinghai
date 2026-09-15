@@ -1,5 +1,5 @@
 import {FIRST_PERSON_SAMPLES} from './first-person-samples.mjs';
-import {resolveFirstPersonVoice} from './first-person-voices.mjs';
+import {resolveFirstPersonVoice,FIRST_PERSON_CATALOG} from './first-person-voices.mjs';
 import {BUILTIN_VOICES} from './builtin-voices.mjs';
 import {PERFORMANCE_VOICES, requestPerformanceAudio} from './clapper.mjs';
 
@@ -9,7 +9,7 @@ const failure = message => Object.assign(Error(message), {status:503, code:'VOIC
 // A version is immutable: changing script/description creates a different identity.
 export async function performanceProfile(ctx, owner) {
  const builtin=ctx.style==='first'?FIRST_PERSON_SAMPLES.find(v=>v.id===ctx.voicePreset):BUILTIN_VOICES[ctx.style];
- if(ctx.style==='first'&&ctx.voicePreset){if(!builtin)throw failure('内置音色不存在');resolveFirstPersonVoice(ctx.narrator,ctx.voicePreset);}
+ if(ctx.style==='first'&&ctx.voicePreset){if(!builtin)throw failure('内置音色不存在');const active=FIRST_PERSON_CATALOG.find(v=>v.gender===builtin.gender&&v.age===builtin.age);resolveFirstPersonVoice(ctx.narrator,active?.id||ctx.voicePreset);}
  const preset=builtin&&builtin.id===ctx.voicePreset?builtin.id:undefined;
  const description = preset?builtin.description:String(ctx.clapperVoice || PERFORMANCE_VOICES[ctx.style]).slice(0,240);
  return {version:1, id:await profileHash([owner,ctx.voiceRevision || 'legacy',ctx.style,ctx.script,description,...(preset?[preset]:[])]),

@@ -8,7 +8,7 @@
 | 双人播客 | coffee, music, ai-hallucination, procrastination | Podcast，Sophie / 刘飞 |
 | 评书 | song-city, silk-road | Seed Audio，story-v1 |
 | 快板 | declutter, fridge | Seed Audio，clapper-v1 |
-| 第一人称 | cat-box | Seed Audio，first-female-young-v1，猫 |
+| 第一人称 | cat-box | Seed Audio，first-female-young-v2，猫 |
 | 第一人称 | sea-wave | Seed Audio，first-male-young-v1，一滴海水 |
 | 第一人称 | museum | Seed Audio，first-male-senior-v1，鹳鱼石斧图彩绘陶缸 |
 

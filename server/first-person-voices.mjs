@@ -1,8 +1,8 @@
 import {APIError} from './zhihu.mjs';
 export const FIRST_PERSON_CATALOG=[
  ['male','young','青年男声·清朗'],['male','adult','成熟男声·沉稳'],['male','senior','年长男声·厚重'],
- ['female','young','青年女声·灵动'],['female','adult','成熟女声·知性'],['female','senior','年长女声·温和']
-].map(([gender,age,name])=>({id:`first-${gender}-${age}-v1`,gender,age,name}));
+ ['female','young','青年女声·清澈自然'],['female','adult','成熟女声·温润知性'],['female','senior','年长女声·质朴从容']
+].map(([gender,age,name])=>({id:`first-${gender}-${age}-${gender==='female'?'v2':'v1'}`,gender,age,name}));
 export function firstPersonVoiceOptions(narrator){
  if(!narrator)return [];
  if(['male','female'].includes(narrator.gender))return FIRST_PERSON_CATALOG.filter(v=>v.gender===narrator.gender);

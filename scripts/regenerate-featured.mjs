@@ -7,11 +7,11 @@ import {createPerformanceStore} from '../server/performance-store.mjs';
 process.loadEnvFile('../tinghai-site/.env.local');
 const env={...process.env,LOCAL_DEV:true,VOICE_CONNECT:nodeVoiceConnect};
 env.PERFORMANCE_STORE=createPerformanceStore(env);
-const root='.local-cache/featured-v2';await fs.mkdir(root,{recursive:true});
+const root=process.env.FEATURED_STAGE||'.local-cache/featured-v2';await fs.mkdir(root,{recursive:true});
 const catalog=JSON.parse(await fs.readFile('public/data/discovery.json','utf8'));
 const styles={photography:'solo',gps:'solo','noise-cancel':'solo','blue-sky':'solo',coffee:'duo',music:'duo','ai-hallucination':'duo',procrastination:'duo','song-city':'story','silk-road':'story',declutter:'clapper',fridge:'clapper','cat-box':'first','sea-wave':'first',museum:'first'};
 const labels={solo:'单人讲解',duo:'双人播客',story:'评书',clapper:'快板',first:'第一人称'};
-const roles={'cat-box':['猫','animal','first-female-young-v1','从我钻进纸箱的动作讲安全感、保温和伏击本能。'],'sea-wave':['一滴海水','object','first-male-young-v1','从我随波上下和前后运动讲清波浪传播与海水运动，区分潮汐和洋流。'],museum:['鹳鱼石斧图彩绘陶缸','object','first-male-senior-v1','由我引导听众观察我的材质、画面和用途，再把观察方法迁移到其他文物；不编造主人、制作经过或战役。']};
+const roles={'cat-box':['猫','animal','first-female-young-v2','从我钻进纸箱的动作讲安全感、保温和伏击本能。'],'sea-wave':['一滴海水','object','first-male-young-v1','从我随波上下和前后运动讲清波浪传播与海水运动，区分潮汐和洋流。'],museum:['鹳鱼石斧图彩绘陶缸','object','first-male-senior-v1','由我引导听众观察我的材质、画面和用途，再把观察方法迁移到其他文物；不编造主人、制作经过或战役。']};
 const duoVoices=['zh_female_sophie_uranus_bigtts','zh_male_liufei_uranus_bigtts'];
 const voice='zh_male_liufei_uranus_bigtts';
 async function post(route,body){const response=await api(new Request('http://localhost'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(600000)}),env);if(!response.ok){const e=await response.json();throw Error(route+': '+e.error)}return response;}
@@ -53,13 +53,14 @@ function textCoverage(expected,actual){
  for(const ch of a){const row=new Uint16Array(b.length+1);for(let j=1;j<=b.length;j++)row[j]=ch===b[j-1]?previous[j-1]+1:Math.max(previous[j],row[j-1]);previous=row;}
  return previous[b.length]/Math.max(1,a.length);
 }
-const items=catalog.categories.flatMap(c=>c.items);
+const items=catalog.categories.flatMap(c=>c.items).filter(item=>!process.env.FEATURED_IDS||process.env.FEATURED_IDS.split(',').includes(item.id));
 const mode=process.argv[2]||'draft';
 if(mode==='promote'){
  const prepared=[];
  for(const item of items){
   const d=await read(item.id+'.json');if(!d)throw Error('Missing '+item.id);
   const ep=d.episode,expected=styles[item.id];
+  if(['first','story','clapper'].includes(expected)){delete ep.voice;delete ep.duoVoices;}
   if(ep.style!==expected||d.ctx.style!==expected||ep.curatedId!==item.id||ep.title!==item.title)throw Error('Catalog mismatch '+item.id);
   if(ep.engine!==(expected==='solo'?'tts':expected==='duo'?'podcast':'seed-audio'))throw Error('Wrong audio route '+item.id);
   if(['first','story','clapper'].includes(expected)&&(!ep.voiceProfile||ep.voiceProfile.preset!==d.ctx.voicePreset))throw Error('Voice mismatch '+item.id);
