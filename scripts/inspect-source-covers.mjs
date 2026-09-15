@@ -1,0 +1,9 @@
+import fs from 'node:fs/promises';
+const catalog=JSON.parse(await fs.readFile('public/data/discovery.json','utf8'));
+const result=[];
+const attrs=tag=>Object.fromEntries([...tag.matchAll(/([\w:-]+)\s*=\s*["']([^"']*)["']/g)].map(m=>[m[1].toLowerCase(),m[2]]));
+const clean=(s,base)=>{try{const u=new URL(s.replaceAll('&amp;','&'),base);return u.protocol==='https:'?u.href:null}catch{return null}};
+const tasks=catalog.categories.flatMap(c=>c.items);let next=0;
+await Promise.all(Array.from({length:4},async()=>{while(next<tasks.length){const item=tasks[next++],saved=JSON.parse(await fs.readFile('.local-cache/catalog/'+item.id+'.json','utf8'));let refs=saved.episode.references.filter(r=>r.url&&!r.url.includes('zhihu.com')).slice(0,2);if(!refs.length)refs=saved.episode.references.slice(0,1);for(const ref of refs){try{const r=await fetch(ref.url,{signal:AbortSignal.timeout(12000)});if(!r.ok){result.push({id:item.id,source:ref.url,status:r.status});continue}const html=await r.text();let images=[];for(const tag of html.match(/<meta\b[^>]*>/gi)||[]){const a=attrs(tag);if(/^(og:image|twitter:image)$/.test(a.property||a.name||'')){const url=clean(a.content||'',ref.url);if(url)images.push({url,kind:'social'})}}for(const tag of html.match(/<img\b[^>]*>/gi)||[]){const a=attrs(tag),src=a['data-original']||a['data-src']||a.src||'';if(/logo|avatar|icon|qrcode|loading|blank|pixel|banner|weixin/i.test(src))continue;const url=clean(src,ref.url);if(url)images.push({url,kind:'body',alt:a.alt||''})}images=images.filter((x,i,a)=>a.findIndex(y=>y.url===x.url)===i).slice(0,10);result.push({id:item.id,source:ref.url,title:ref.title,status:r.status,images});}catch(e){result.push({id:item.id,source:ref.url,error:e.name})}}}}));
+await fs.writeFile('.local-cache/source-covers.json',JSON.stringify(result,null,2));
+for(const x of result)console.log(JSON.stringify({id:x.id,status:x.status,error:x.error,images:x.images?.slice(0,4)}));

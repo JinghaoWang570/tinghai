@@ -1,0 +1,55 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Dependencies and builds
+node_modules/
+dist/
+build/
+coverage/
+.sites-runtime/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local content and logs
+.local-cache/
+log/
+*.log
+tmp/
+temp/
+
+# Local diagnostic artifacts
+.shots/
+.shots-after/
+diagnostics/*.tmp.*
+diagnostics/official-demo/
+diagnostics/library-reconcile/
+diagnostics/add-connection-logs.mjs
+diagnostics/finish-local.mjs
+diagnostics/install-api-log.mjs
+diagnostics/integrate-local.mjs
+diagnostics/refine-api-log.mjs
+public/marker-comparison.html
+public/audio/marker-comparison/
+public/audio/podcast-selected-verification.mp3
+public/assets/kanshan-navigation-v2.png
+public/assets/tinghai-favicon.jpg
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+.vercel
+.env*
+
+.vercel-static/
+
+!.env.example

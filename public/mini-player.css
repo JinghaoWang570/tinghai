@@ -1,0 +1,30 @@
+.bottomnav button.active .kanshan-nav:before,.topnav button.active .kanshan-nav:before{background-image:url('/assets/kanshan-navigation-active-e45b4df131.webp')}
+.mini-player{position:relative;display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:10px 12px;background:linear-gradient(110deg,#e0f2fa,#f6fbff);border:1px solid #d4e7f1;border-radius:17px;overflow:hidden;box-shadow:0 3px 12px #17384905}
+.mini-player-open{display:flex;align-items:center;gap:12px;flex:1;min-width:0;text-align:left;padding:0;color:var(--ink)}
+.mini-player-art{position:relative;display:block;flex:none;width:50px;height:54px;border-radius:12px;background:#b7eafb;overflow:hidden}
+.mini-player-art img{width:100%;height:100%;object-fit:contain}
+.mini-player-copy{display:flex;flex-direction:column;gap:2px;min-width:0}.mini-player-copy strong{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-player-copy small{font-size:11px;color:#78909c;font-variant-numeric:tabular-nums}.mini-player-copy [data-mini-status]{color:#1774bc}
+.mini-player-toggle{display:grid;place-items:center;flex:none;width:42px;height:42px;background:#fff;border:1px solid #d6e9f6;border-radius:50%;color:#0878e9}.mini-player-toggle svg{width:21px;height:21px}.mini-player-toggle:disabled{opacity:.45}
+.mini-player-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:#d4eaf4}.mini-player-progress i{display:block;width:0;height:100%;background:#1697e8;transition:width .25s linear}
+.mini-sound{position:absolute;bottom:3px;right:3px;display:flex;align-items:center;gap:2px;height:13px;background:#fff9;border-radius:4px;padding:2px}.mini-sound i{width:2px;height:3px;background:#0878e9;border-radius:2px}.is-playing .mini-sound i{animation:mini-wave .8s ease-in-out infinite alternate}.is-playing .mini-sound i:nth-child(2){animation-delay:-.3s}.is-playing .mini-sound i:nth-child(3){animation-delay:-.6s}
+.mini-player button:focus-visible{outline:2px solid #0878e9;outline-offset:2px}@keyframes mini-wave{to{height:10px}}@media(prefers-reduced-motion:reduce){.is-playing .mini-sound i{animation:none;height:8px}.mini-player-progress i{transition:none}}
+
+/* Keep the current episode attached to navigation, above its actual height. */
+.bottom-dock{position:fixed;inset:auto 0 0;z-index:20;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.bottom-dock>.mini-player{width:calc(100% - 32px);max-width:640px;margin:0 16px 8px;pointer-events:auto;box-shadow:0 -3px 20px #1738490c}
+.bottom-dock>.bottomnav{position:relative;inset:auto;width:100%;pointer-events:auto}
+#app:has(.bottom-dock>.mini-player)>.shell{padding-bottom:calc(200px + env(safe-area-inset-bottom))}
+.shell:has(.listen-page)~.bottom-dock{display:none}
+@media(min-width:701px){.bottom-dock>.mini-player{margin-bottom:16px}#app:has(.bottom-dock>.mini-player)>.shell{padding-bottom:120px}}
+
+/* A compact playback rail joins the navigation instead of floating above it. */
+.bottom-dock>.mini-player{width:100%;max-width:none;margin:0;padding:9px 22px;gap:12px;background:#fff;border:0;border-top:1px solid #e7edef;border-radius:0;box-shadow:none;min-height:62px}
+.mini-player-art{width:42px;height:42px;border-radius:5px;background:#eaf4f7}
+.mini-player-art img{object-fit:cover}
+.mini-player-copy{gap:4px}.mini-player-copy strong{font-size:14px;font-weight:550}.mini-player-copy small{font-size:11px;color:#9aa6ac}
+.mini-player-copy [data-mini-status]{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.mini-player-toggle{width:38px;height:38px;border:0;background:#edf8fc;color:#137db1}
+.mini-player-progress{height:1px;opacity:.8}
+.mini-sound{display:none}
+#app:has(.bottom-dock>.mini-player)>.shell{padding-bottom:calc(165px + env(safe-area-inset-bottom))}
+@media(min-width:701px){.bottom-dock>.mini-player{width:min(920px,100%);padding:10px 20px;border:1px solid #e7edef}.bottom-dock>.mini-player{margin-bottom:0}#app:has(.bottom-dock>.mini-player)>.shell{padding-bottom:100px}}

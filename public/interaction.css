@@ -1,0 +1,16 @@
+.discovery-search{overflow:hidden;transition:background .18s ease,transform .18s ease}
+.discovery-search:active{transform:scale(.986);background:#e6f2fa}
+.discovery-inspiration{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.discovery-episode,.discovery-categories button,.mini-player-toggle,.listen-transport button,.cover-play{transition:background .18s ease,transform .18s ease}
+.discovery-episode:active{transform:scale(.985)}
+.mini-player-toggle:active,.listen-transport button:active,.cover-play:active{transform:scale(.94)}
+.bottomnav .nav-symbol{transition:transform .22s ease,background-color .22s ease}
+.bottomnav button.active .nav-symbol{transform:translateY(-2px)}
+dialog[open]{animation:sheet-arrive .2s ease-out}
+@keyframes sheet-arrive{from{opacity:.4;translate:0 12px}to{opacity:1;translate:0 0}}
+.mini-player-queue{display:grid;place-items:center;width:32px;height:38px;flex:none;color:#73909f;padding:4px}.mini-player-queue svg{width:22px;height:22px}
+.queue-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.queue-heading label{display:flex;align-items:center;gap:6px;font-size:14px}.queue-heading input{accent-color:#0878e9}
+.queue-current{padding:14px;background:#edf6fa;border-radius:12px;margin:18px 0}.queue-current strong,.queue-current small{display:block}.queue-current small{color:#718d9c;margin-bottom:6px}.queue-current strong{font-size:15px;line-height:1.5}
+.queue-item{display:flex;gap:10px;align-items:center;padding:14px 0;border-bottom:1px solid #e8eef1}.queue-item>span{font-size:12px;color:#8095a0}.queue-item>div{flex:1;min-width:0}.queue-item strong{display:block;font-size:14px;line-height:1.5}.queue-item small{display:block;color:#8397a1;margin-top:5px}.queue-item button{flex:none;width:32px;height:36px;padding:6px;color:#73909f}.queue-item button:disabled{opacity:.2}.queue-item svg{width:18px;height:18px}
+.queue-add{display:flex;gap:8px;margin:18px 0}.queue-add select{flex:1;min-width:0;padding:10px;border:1px solid #dce7ed;border-radius:10px;background:#fff;color:var(--ink)}.queue-add button{flex:none}
+@media(prefers-reduced-motion:reduce){.discovery-search,.discovery-episode,.discovery-categories button,.mini-player-toggle,.listen-transport button,.cover-play,.bottomnav .nav-symbol{transition:none}dialog[open]{animation:none}.discovery-episode:active,.discovery-search:active{transform:none}}

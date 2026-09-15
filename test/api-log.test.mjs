@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {sanitize,collector} from '../scripts/api-log.mjs';
+test('API log redacts credentials and contexts while preserving user input and model',()=>{const d=sanitize({Authorization:'Bearer secret',context:'signed',model:'duplex',input:'为什么日落会变红',output:{text:'因为散射',audio:'A'.repeat(400)}});assert.equal(d.Authorization,'[REDACTED]');assert.equal(d.context,'[REDACTED]');assert.equal(d.input,'为什么日落会变红');assert.equal(d.output.audio.base64Bytes,300)});
+test('API log assembles fragmented SSE and summarizes audio without storing base64',()=>{const c=collector('text/event-stream');c.push(Buffer.from('data: {"type":"to'));c.push(Buffer.from('ken","text":"你好"}\n\ndata: '+JSON.stringify({type:'audio',data:'A'.repeat(400)})+'\n\n'));const d=c.result();assert.equal(d.events[0].text,'你好');assert.deepEqual(d.events[1].data,{base64Bytes:300});assert.ok(d.bytes>400)});
+test('API log bounds large text and reports truncation',()=>{const d=sanitize('好'.repeat(70000));assert.equal(d.totalChars,70000);assert.equal(d.truncated,true);assert.equal(d.text.length,65536)});

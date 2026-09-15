@@ -1,0 +1,33 @@
+.method select{max-width:170px;border:0;background:#edf5fe;color:var(--blue);border-radius:8px;padding:8px 10px;font-size:13px}.inline-link{font-size:13px;color:var(--blue);padding:6px 0;text-decoration:none}.content-entry{display:flex;justify-content:center;gap:25px;margin-top:17px}.content-entry button{color:var(--muted);font-size:12px;display:flex;align-items:center;gap:7px}.content-entry svg{width:16px;height:16px}.discovery-tabs{margin-bottom:15px}.discovery-tabs button{font-size:12px;padding:10px 6px}.hot-rank{font-size:20px;color:var(--blue);font-weight:700;min-width:24px}.inline-form{display:flex;gap:10px;margin-bottom:15px}.inline-form input{min-width:0;flex:1;border:1px solid var(--line);border-radius:12px;padding:10px}.inline-form .primary{width:75px;min-height:45px}.loading{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted);padding:20px 0}.spinner{display:inline-block;width:18px;height:18px;flex-shrink:0;border:2px solid #c1d9e7;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}.spinner.light{border-color:#ffffff66;border-top-color:white}@keyframes spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.spinner{animation:none}*{scroll-behavior:auto!important}}.error,#ask-error{font-size:14px;line-height:1.8;color:#a53d32;background:#fff1ed;padding:12px;border-radius:10px}.error:empty,#ask-error:empty{display:none}.failed{color:#a53d32!important;background:#fff0eb!important}.source-excerpt{max-height:40dvh;overflow-y:auto;border-left:3px solid #cfdfeb;padding-left:15px;font-size:14px}.external-link{display:inline-block;margin:18px 0 4px}.scope-list{display:grid;gap:10px}.base-row{margin:12px 0;display:flex;align-items:center;gap:10px}.base-row .source-choice{flex:1}.base-row small{font-size:12px;color:var(--muted);display:block;margin-top:4px}.quota-row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:15px 0;font-size:14px}.quota-row strong{color:var(--blue)}.quota-row small{font-weight:400;color:var(--muted)}.upload-box{display:block;margin:20px 0;border:1px dashed #92b6cc;padding:20px;border-radius:14px;font-size:14px;line-height:1.8}.upload-box input{display:block;max-width:100%;font-size:13px;margin-top:12px}.full-select{width:100%;border:1px solid var(--line);background:white;border-radius:10px;padding:12px;margin-top:10px}.current-script p{margin:0 0 10px}.current-script p:last-child{margin-bottom:0}.current-script small{font-size:12px;color:var(--blue)}.answer-copy p{overflow-wrap:anywhere}.dialog-copy p{overflow-wrap:anywhere}@media(max-width:700px){.hero{min-height:190px}.input-wrap textarea{min-height:100px}.micro{font-size:12px}.source-row strong{overflow-wrap:anywhere}.method label{font-size:13px}.answer-copy .loading{padding:15px 0}.content-entry{margin-top:12px}.base-row .source-choice{min-width:0}}
+.compact-answer{max-width:720px;margin:0 auto}
+.compact-answer .page-title{margin-bottom:24px}
+.search-fold{background:white;border:1px solid var(--line);border-radius:16px;margin:12px 0;overflow:hidden}
+.search-fold summary{display:flex;align-items:center;gap:12px;padding:19px 20px;cursor:pointer;list-style:none;font-weight:600;font-size:16px}
+.search-fold summary::-webkit-details-marker{display:none}
+.search-fold summary small{margin-left:auto;color:var(--muted);font-size:12px;font-weight:400}
+.search-fold summary:after{content:'›';font-size:22px;font-weight:400;color:var(--muted);transform:rotate(90deg)}
+.search-fold[open] summary:after{transform:rotate(-90deg)}
+.search-fold-body{padding:0 20px 20px;border-top:1px solid var(--line)}
+.search-fold-body #answer-body{padding-top:14px}
+.search-progress{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.compact-answer .foot-action{margin-top:24px}
+
+.home-grid{grid-template-columns:minmax(0,1fr);max-width:760px;margin:auto}.discovery-page{max-width:760px;margin:auto}
+
+.nav-symbol{display:inline-flex;align-items:center;justify-content:center;width:40px;height:30px;border-radius:12px;transition:background .18s,color .18s}
+.nav-symbol svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.bottomnav button{gap:3px}.bottomnav button svg{width:24px;height:24px}
+.bottomnav button.active .nav-symbol{background-color:#e0f0ff;color:#0878e9}
+.active .nav-symbol .nav-accent{fill:#0878e91a}
+.topnav button{display:inline-flex;align-items:center;gap:4px}.topnav .nav-symbol{width:28px}
+
+.nav-symbol.kanshan-nav{width:44px;height:44px;background-image:url('/assets/kanshan-navigation-e447472ac3.webp');background-size:300% 100%;background-repeat:no-repeat;border-radius:0;filter:grayscale(1);opacity:.65;transition:filter .18s,opacity .18s,transform .18s}
+.kanshan-nav-ask{background-position:0 50%}.kanshan-nav-discover{background-position:50% 50%}.kanshan-nav-listen{background-position:100% 50%}
+.bottomnav button.active .kanshan-nav,.topnav button.active .kanshan-nav{background-color:transparent;filter:none;opacity:1;transform:translateY(-2px)}
+.topnav .nav-symbol.kanshan-nav{width:34px;height:34px}.bottomnav button{padding-top:0;gap:0}
+.hot-thumbnail{width:78px;height:68px;object-fit:cover;border-radius:10px;flex:none}.hot-topic{gap:12px}.hot-topic .topic-text{min-width:0;flex:1}.hot-topic .topic-text strong{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.hot-topic>svg{width:16px;flex:none}.hot-topic .hot-rank{min-width:20px}
+.bottomnav button .kanshan-nav,.topnav button .kanshan-nav{border-radius:14px;filter:grayscale(1);opacity:.55;transform:scale(.9);background-color:transparent}
+.bottomnav button.active .kanshan-nav,.topnav button.active .kanshan-nav{background-color:#dceeff;filter:none;opacity:1;transform:translateY(-2px) scale(1);box-shadow:0 2px 7px #0878e914}
+.bottomnav button.active,.topnav button.active{color:#0878e9;font-weight:650}
+.bottomnav button:not(.active),.topnav button:not(.active){color:#83949d;font-weight:400}
+@media(prefers-reduced-motion:reduce){.nav-symbol.kanshan-nav{transition:none}}

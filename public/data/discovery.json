@@ -1,0 +1,249 @@
+{
+  "categories": [
+    {
+      "id": "hobby",
+      "name": "兴趣爱好",
+      "subtitle": "把喜欢的事，再多懂一点",
+      "color": "#306b69",
+      "items": [
+        {
+          "id": "coffee",
+          "title": "一杯咖啡，为什么有那么多风味？",
+          "query": "咖啡的酸甜苦和香气从哪里来？烘焙、产地和冲煮如何影响风味？",
+          "coverText": "咖啡\n风味地图",
+          "ready": true,
+          "sourceCount": 6,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:44:24.475Z",
+          "subtitle": "从产地、烘焙到杯中的酸甜苦",
+          "durationSeconds": 170,
+          "coverImage": "/assets/cover-coffee-3d0ec905af.webp",
+          "coverSource": "https://www.gafei.com/kafeibiji-21066",
+          "coverSourceTitle": "精品咖啡学 真正的咖啡醇香味到底从哪里来? 咖啡网  09月01日更新",
+          "coverOriginal": "https://www.gafei.com/uploads/allimg/141228/16032C149-0.jpg"
+        },
+        {
+          "id": "photography",
+          "title": "拍照好看，真的靠相机吗？",
+          "query": "普通人用手机摄影，光线和构图为什么比器材更重要？",
+          "coverText": "光线\n胜过器材",
+          "ready": true,
+          "sourceCount": 6,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:44:22.042Z",
+          "subtitle": "读懂光线，再谈构图和器材",
+          "durationSeconds": 151,
+          "coverImage": "/assets/cover-photography-9e62be8d3a.webp",
+          "coverSource": "https://post.smzdm.com/p/a03dk25z/",
+          "coverSourceTitle": "手机拍的照片凭啥拿国际大奖?评委说出了创意真相_影像_什么值得买",
+          "coverOriginal": "https://a.zdmimg.com/202608/20/6a865f761f6cd2888.jpg_fo742.jpg"
+        },
+        {
+          "id": "music",
+          "title": "为什么一首歌能让人单曲循环？",
+          "query": "为什么人会对一首歌反复单曲循环？音乐中的重复、期待和情绪有什么关系？",
+          "coverText": "再听\n一遍",
+          "ready": true,
+          "sourceCount": 8,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:44:52.623Z",
+          "subtitle": "旋律如何牵动期待与情绪",
+          "durationSeconds": 201,
+          "coverImage": "/assets/cover-music-2869ababb6.webp",
+          "coverSource": "https://m.thepaper.cn/newsDetail_forward_33077448",
+          "coverSourceTitle": "青浦卫健说 | 大脑单曲循环之谜:为什么你的脑子关不掉那首歌?",
+          "coverOriginal": "https://imgpai.thepaper.cn/pphimage/20260429/e2654436-9577-4450-80e3-0d7a090038d9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "name": "人文历史",
+      "subtitle": "在别人的时代，找到自己的问题",
+      "color": "#9b5a38",
+      "items": [
+        {
+          "id": "song-city",
+          "title": "宋朝人下班后，都去哪里玩？",
+          "query": "宋代城市居民有哪些日常休闲娱乐？瓦舍、勾栏和夜市反映了怎样的城市生活？",
+          "coverText": "宋人\n下班以后",
+          "ready": true,
+          "sourceCount": 8,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:44:47.410Z",
+          "subtitle": "在夜市与瓦舍，走进宋人的日常",
+          "durationSeconds": 141
+        },
+        {
+          "id": "silk-road",
+          "title": "丝绸之路，运送的只有丝绸吗？",
+          "query": "丝绸之路除了丝绸还传播了哪些商品、技术与文化？为什么它是交流网络？",
+          "coverText": "不只有\n丝绸",
+          "ready": true,
+          "sourceCount": 7,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:45:15.855Z",
+          "subtitle": "商品之外，还有技术与文化的远行",
+          "durationSeconds": 187
+        },
+        {
+          "id": "museum",
+          "title": "逛博物馆，怎样看懂一件文物？",
+          "query": "普通人逛博物馆如何看懂文物？从材料、用途和时代背景理解文物的方法是什么？",
+          "coverText": "文物\n会说话",
+          "ready": true,
+          "sourceCount": 5,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:45:21.618Z",
+          "subtitle": "从材料和用途，听懂文物的故事",
+          "durationSeconds": 171
+        }
+      ]
+    },
+    {
+      "id": "technology",
+      "name": "科技",
+      "subtitle": "把未来，放进今天的耳机",
+      "color": "#4554ae",
+      "items": [
+        {
+          "id": "ai-hallucination",
+          "title": "AI 为什么会一本正经地说错话？",
+          "query": "大语言模型为什么会出现幻觉？检索增强和来源核验能解决哪些问题、有哪些边界？",
+          "coverText": "AI 也会\n说错话",
+          "ready": true,
+          "sourceCount": 4,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:46:01.675Z",
+          "subtitle": "流畅的答案，为什么未必可靠",
+          "durationSeconds": 216
+        },
+        {
+          "id": "gps",
+          "title": "手机怎么知道你在哪里？",
+          "query": "手机定位如何结合卫星、基站和Wi-Fi？为什么室内和高楼附近定位会漂移？",
+          "coverText": "你在\n这里",
+          "ready": true,
+          "sourceCount": 5,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:48:49.927Z",
+          "subtitle": "卫星、基站与 Wi-Fi 的定位协作",
+          "durationSeconds": 178
+        },
+        {
+          "id": "noise-cancel",
+          "title": "降噪耳机，怎么把声音变没的？",
+          "query": "主动降噪耳机的原理是什么？为什么对低频噪声有效却不能完全消除人声？",
+          "coverText": "安静的\n另一面",
+          "ready": true,
+          "sourceCount": 5,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:46:09.058Z",
+          "subtitle": "抵消噪声，也有做不到的地方",
+          "durationSeconds": 141,
+          "coverImage": "/assets/cover-noise-cancel-c4432f2d04.webp",
+          "coverSource": "https://post.smzdm.com/p/ae6vxwez/",
+          "coverSourceTitle": "半年9条知乎提问都在问同一件事:两千块的降噪耳机,隔不掉同事说话:买\"工位清净\"前,先让工位答3个问题_耳机_什么值得买",
+          "coverOriginal": "https://a.zdmimg.com/202609/10/6aa18a8a69b244508.png_fo742.jpg"
+        }
+      ]
+    },
+    {
+      "id": "life",
+      "name": "生活",
+      "subtitle": "听懂每天遇见的小事",
+      "color": "#87602d",
+      "items": [
+        {
+          "id": "fridge",
+          "title": "冰箱里的食物，为什么要分区？",
+          "query": "家用冰箱冷藏室如何分区存放食物？生熟分开、温度和水分为什么重要？",
+          "coverText": "冰箱里\n的秩序",
+          "ready": true,
+          "sourceCount": 8,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:46:32.956Z",
+          "subtitle": "生熟、温区与水分的存放讲究",
+          "durationSeconds": 125,
+          "coverImage": "/assets/cover-fridge-6c6824a636.webp",
+          "coverSource": "https://www.kepuchina.cn/article/articleinfo?ar_id=646584&business_type=100&classify=0",
+          "coverSourceTitle": "冰箱不是万能箱!食物存放位置图鉴",
+          "coverOriginal": "https://pqnoss.kepuchina.cn/kepuyun/2025/10/31/17/1761813185889.jpg"
+        },
+        {
+          "id": "declutter",
+          "title": "东西越收拾，怎么反而越乱？",
+          "query": "家庭收纳为什么容易反复变乱？减少物品、固定位置和降低归位成本有哪些实用方法？",
+          "coverText": "给生活\n留点空",
+          "ready": true,
+          "sourceCount": 6,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:46:48.479Z",
+          "subtitle": "让物品归位，比收纳技巧更重要",
+          "durationSeconds": 162
+        },
+        {
+          "id": "procrastination",
+          "title": "为什么越重要的事，越想拖延？",
+          "query": "为什么越重要的任务越容易拖延？任务的不确定性、情绪调节和拆分任务有什么关系？",
+          "coverText": "等一下\n再开始？",
+          "ready": true,
+          "sourceCount": 6,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:47:13.579Z",
+          "subtitle": "从情绪和任务拆分，找到起步点",
+          "durationSeconds": 181
+        }
+      ]
+    },
+    {
+      "id": "curiosity",
+      "name": "好奇心",
+      "subtitle": "那些一直想问的为什么",
+      "color": "#18799b",
+      "items": [
+        {
+          "id": "blue-sky",
+          "title": "天空的蓝色，是谁调出来的？",
+          "query": "天空为什么是蓝色的，日落为什么偏红？瑞利散射如何解释这些现象？",
+          "coverText": "天空\n调色盘",
+          "ready": true,
+          "sourceCount": 7,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:47:24.032Z",
+          "subtitle": "从蓝天到晚霞，听懂光的散射",
+          "durationSeconds": 155
+        },
+        {
+          "id": "cat-box",
+          "title": "猫为什么对纸箱毫无抵抗力？",
+          "query": "猫为什么喜欢钻纸箱？安全感、保温和伏击行为有哪些解释？",
+          "coverText": "猫与\n一只纸箱",
+          "ready": true,
+          "sourceCount": 6,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:47:49.382Z",
+          "subtitle": "安全感、温度和狩猎本能",
+          "durationSeconds": 157,
+          "coverImage": "/assets/cover-cat-box-ab0ed5610a.webp",
+          "coverSource": "https://www.163.com/dy/article/L6GD1D5305562RFE.html",
+          "coverSourceTitle": "猫咪为什么对纸箱情有独钟?科学解释来了|猫窝|猎手|纸板|玩具|毛绒|瓦楞纸_网易订阅",
+          "coverOriginal": "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0910%2Fddb0c382j00tl5hvz003id0013i00m8p.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
+        },
+        {
+          "id": "sea-wave",
+          "title": "海浪一直往岸边跑，海水呢？",
+          "query": "海浪传播时海水是不是一直向前移动？波浪、潮汐和洋流有什么区别？",
+          "coverText": "海浪\n去哪里",
+          "ready": true,
+          "sourceCount": 7,
+          "style": "双人播客",
+          "createdAt": "2026-09-14T15:48:03.788Z",
+          "subtitle": "分清波浪、潮汐和洋流",
+          "durationSeconds": 163
+        }
+      ]
+    }
+  ],
+  "community": []
+}

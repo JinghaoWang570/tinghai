@@ -1,0 +1,2 @@
+import WebSocket from 'ws';
+export async function nodeVoiceConnect(url,headers){return new Promise((resolve,reject)=>{const ws=new WebSocket(url,{headers,handshakeTimeout:15000});ws.binaryType='arraybuffer';ws.once('upgrade',res=>{ws.requestId=res.headers['x-tt-logid']||res.headers['x-request-id']||null});ws.once('open',()=>resolve(ws));ws.once('error',()=>reject(new Error('语音连接失败，请检查服务权限与网络')));ws.once('unexpected-response',(_req,res)=>{res.resume();reject(new Error('语音鉴权或服务权限不足（'+res.statusCode+'）'));ws.terminate()})})}

@@ -1,0 +1,20 @@
+{
+  "before": 14570930,
+  "after": 219966,
+  "spriteBytes": 30506,
+  "mapping": {
+    "/assets/kanshan-listening.png": "/assets/kanshan-listening-50844f827e.webp",
+    "/assets/kanshan-navigation-active.png": "/assets/kanshan-navigation-active-e45b4df131.webp",
+    "/assets/kanshan-navigation-v3.png": "/assets/kanshan-navigation-v3-99924d5c51.webp",
+    "/assets/kanshan-navigation.png": "/assets/kanshan-navigation-e447472ac3.webp",
+    "/assets/kanshan-player-default.png": "/assets/kanshan-player-default-eee0ee7689.webp",
+    "/assets/kanshan-player-duo-clean.png": "/assets/kanshan-player-duo-clean-e07a2497d7.webp",
+    "/assets/kanshan-player-duo.png": "/assets/kanshan-player-duo-57a012cbd3.webp",
+    "/assets/kanshan-style-clapper.png": "/assets/kanshan-style-clapper-2187aa9aa0.webp",
+    "/assets/kanshan-style-first.png": "/assets/kanshan-style-first-b4f63aaa5f.webp",
+    "/assets/kanshan-style-story.png": "/assets/kanshan-style-story-4b19c51d14.webp",
+    "/assets/share-map.png": "/assets/share-map-3167056b2d.webp",
+    "/assets/tinghai-favicon-rounded.svg": "/assets/tinghai-favicon-rounded-ba051779af.webp",
+    "/assets/tinghai-share-art.png": "/assets/tinghai-share-art-cf7b6db2ee.webp"
+  }
+}
