@@ -6,12 +6,13 @@ function firstPersonReady(){return narratorReady()&&!narratorJob&&!narratorConfi
 function firstPersonVoiceContents(){
  if(!narratorReady())return '<p class="micro narrator-status">'+(narratorJob?'正在识别视角与音色…':narratorError?esc(narratorError)+' <button type="button" data-narrator-retry>重试</button>':'内容就绪后自动识别视角')+'</p>';
  const n=state.firstPersonNarrator,voices=state.firstPersonVoices||[],selected=voices.find(v=>v.id===state.firstPersonPreset);
- return '<p class="narrator-status">视角：'+esc(n.name)+'</p>'+'<label for="narrator-gender">角色性别</label><select id="narrator-gender"><option value="" '+(!["male","female"].includes(n.gender)?'selected':'')+'>请选择</option><option value="male" '+(n.gender==='male'?'selected':'')+'>男性</option><option value="female" '+(n.gender==='female'?'selected':'')+'>女性</option></select><label for="narrator-age">故事中的年龄段</label><select id="narrator-age">'+[['unknown','不明确'],['young','青年'],['adult','成年'],['senior','年长']].map(([v,label])=>'<option value="'+v+'" '+((n.ageGroup||'unknown')===v?'selected':'')+'>'+label+'</option>').join('')+'</select>'+(voices.length?'<label for="first-person-preset">音色</label><select id="first-person-preset" aria-label="音色">'+voices.map(v=>'<option value="'+esc(v.id)+'" '+(selected?.id===v.id?'selected':'')+'>'+esc(v.name)+'</option>').join('')+'</select>'+(selected?'<audio controls preload="none" aria-label="试听音色" style="width:100%;margin-top:12px" src="/audio/voices/'+encodeURIComponent(selected.id)+'.mp3"></audio>':''):'')+(narratorError?'<p class="error">'+esc(narratorError)+' <button type="button" data-narrator-match-retry>重试</button></p>':'');
+ return '<p class="narrator-status">视角：'+esc(n.name)+'</p>'+'<label for="narrator-gender">角色性别</label><select id="narrator-gender"><option value="male" '+(n.gender==='male'?'selected':'')+'>男性</option><option value="female" '+(n.gender==='female'?'selected':'')+'>女性</option></select>'+(voices.length?'<label for="first-person-preset">音色</label><select id="first-person-preset" aria-label="音色">'+voices.map(v=>'<option value="'+esc(v.id)+'" '+(selected?.id===v.id?'selected':'')+'>'+esc(v.name)+'</option>').join('')+'</select>'+(selected?'<audio controls preload="none" aria-label="试听音色" style="width:100%;margin-top:12px" src="/audio/voices/'+encodeURIComponent(selected.id)+'.mp3"></audio>':''):'')+(narratorError?'<p class="error">'+esc(narratorError)+' <button type="button" data-narrator-match-retry>重试</button></p>':'');
 }
 function firstPersonVoiceSelection(){return '<div class="setting clapper-voice">'+firstPersonVoiceContents()+'</div>'}
 function paintNarrator(){
  const box=document.querySelector('.clapper-voice');if(!box||state.style!=='first')return;
  box.innerHTML=firstPersonVoiceContents();
+ const genderSelect=box.querySelector("#narrator-gender");if(genderSelect&&!['male','female'].includes(state.firstPersonNarrator?.gender))genderSelect.selectedIndex=-1;
  const generateButton=document.querySelector('[data-action="generate"]');if(generateButton)generateButton.disabled=!state.answerReady||!!state.busy||!firstPersonReady();
 }
 function applyNarratorResult(result){state.result.context=result.context;narratorSource=result.context;state.firstPersonNarrator=result.narrator;state.firstPersonVoices=result.voices||[];state.firstPersonPreset=result.voicePreset;}
@@ -57,7 +58,7 @@ async function updateNarratorVoice(){
  finally{if(narratorUpdate===current){narratorUpdate=null;narratorConfirming=false;paintNarrator()}}
 }
 document.addEventListener('change',e=>{
- if(!['narrator-gender','narrator-age'].includes(e.target.id)||!narratorReady())return;
+ if(!['narrator-gender'].includes(e.target.id)||!narratorReady())return;
  const key=e.target.id==='narrator-gender'?'gender':'ageGroup';
  state.firstPersonNarrator={...state.firstPersonNarrator,[key]:e.target.value};
  updateNarratorVoice();
