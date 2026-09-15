@@ -41,3 +41,17 @@ test('viewpoint label omits gender and async analysis installs the matching voic
  assert.equal(c.state.firstPersonPreset,'first-male-adult-v1');assert.equal(c.state.firstPersonVoices.length,3);
  const html=vm.runInContext('firstPersonVoiceContents()',c);assert.match(html,/视角：苏轼<\/p>/);assert.doesNotMatch(html,/视角：苏轼[ ·]+男性/);assert.doesNotMatch(html,/<textarea/);assert.equal(vm.runInContext('firstPersonReady()',c),true);
 });
+
+test('automatic narrator matching keeps the latest selection when responses arrive out of order',async()=>{
+ const pending=[],listeners={};
+ const c=vm.createContext({state:{style:'first',answerReady:true,result:{context:'source'}},document:{addEventListener(type,fn){(listeners[type]??=[]).push(fn)},querySelector(){return null}},render(){},generate(){},AbortController,esc:String,queueMicrotask,request:async(url,body)=>url==='/api/narrator'?{...narratorVoiceResult(narrator),context:'signed'}:new Promise(resolve=>pending.push({body,resolve}))});
+ vm.runInContext(fs.readFileSync('public/first-person.js','utf8'),c);await vm.runInContext('ensureNarrator()',c);
+ const change=(id,value)=>listeners.change.forEach(fn=>fn({target:{id,value}}));
+ change('narrator-gender','female');change('narrator-age','senior');
+ assert.equal(pending.length,2);assert.equal(pending[1].body.gender,'female');assert.equal(pending[1].body.ageGroup,'senior');assert.equal(vm.runInContext('firstPersonReady()',c),false);
+ pending[1].resolve({...narratorVoiceResult({...narrator,gender:'female',ageGroup:'senior'}),context:'newest'});await new Promise(r=>setImmediate(r));
+ pending[0].resolve({...narratorVoiceResult({...narrator,gender:'female'}),context:'stale'});await new Promise(r=>setImmediate(r));
+ assert.equal(c.state.result.context,'newest');assert.equal(c.state.firstPersonPreset,'first-female-senior-v1');assert.equal(vm.runInContext('firstPersonReady()',c),true);
+ const html=vm.runInContext('firstPersonVoiceContents()',c);assert.doesNotMatch(html,/<details|确认并匹配|材料不足/);assert.ok(html.indexOf('角色性别')<html.indexOf('first-person-preset'));
+ change('narrator-gender','');assert.equal(c.state.firstPersonVoices.length,0);assert.equal(vm.runInContext('firstPersonReady()',c),false);
+});
