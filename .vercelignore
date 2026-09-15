@@ -16,3 +16,6 @@ scripts/api-log.mjs
 public/marker-comparison.html
 public/audio/marker-comparison
 output
+tmp
+temp
+log

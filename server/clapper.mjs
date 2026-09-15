@@ -39,18 +39,29 @@ ${segment.text}
  if(Array.from(text_prompt).length>3000)throw clapperError('快板提示词超过3000字符',400);
  return {model:'seed-audio-1.0',text_prompt,audio_config:{format:'mp3',sample_rate:44100,speech_rate:-10,enable_subtitle:true}};
 }
-export async function* clapperAudio(env,segments,signal,profile,style='clapper'){
+export async function requestPerformanceAudio(env,body,signal){
  if(!env.VOLC_API_KEY)throw clapperError('全要素音频服务尚未配置',503);
+ signal?.throwIfAborted();
+ const controller=new AbortController(),abort=()=>controller.abort(signal?.reason);signal?.addEventListener('abort',abort,{once:true});
+ const timer=setTimeout(()=>controller.abort(),240000);
+ try{
+  const r=await (env.VOICE_FETCH||fetch)('https://openspeech.bytedance.com/api/v3/tts/create',{method:'POST',headers:{'Content-Type':'application/json','X-Api-Key':env.VOLC_API_KEY,'X-Api-Request-Id':crypto.randomUUID()},body:JSON.stringify(body),signal:controller.signal});
+  const data=await r.json();
+  if(!r.ok||(data.code!=null&&![0,20000000].includes(data.code)))throw clapperError('表演音频生成失败（'+(data.code||r.status)+'），请重试或检查服务权限');
+  if(typeof data.audio!=='string'||!data.audio.length||data.audio.length>24000000||!/^[A-Za-z0-9+/=]+$/.test(data.audio))throw clapperError('音频模型未返回有效音频');
+  return {audio:data.audio,duration:data.duration,subtitle:data.subtitle,original_duration:data.original_duration};
+ }catch(e){if(controller.signal.aborted&&!signal?.aborted)throw clapperError('表演音频生成超时，请重试',504);throw e}
+ finally{clearTimeout(timer);signal?.removeEventListener('abort',abort)}
+}
+export async function* clapperAudio(env,segments,signal,profile,style='clapper',session){
  for(const [index,segment] of segments.entries()){
   signal?.throwIfAborted();yield {type:'round',index};
-  const controller=new AbortController(),abort=()=>controller.abort(signal?.reason);signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(()=>controller.abort(Error('表演音频生成超时，请重试')),240000);
-  try{
-   const r=await (env.VOICE_FETCH||fetch)('https://openspeech.bytedance.com/api/v3/tts/create',{method:'POST',headers:{'Content-Type':'application/json','X-Api-Key':env.VOLC_API_KEY,'X-Api-Request-Id':crypto.randomUUID()},body:JSON.stringify(clapperAudioRequest(segment,index,segments.length,profile,style)),signal:controller.signal});
-   const data=await r.json();if(!r.ok||(data.code!=null&&![0,20000000].includes(data.code)))throw clapperError('表演音频生成失败（'+(data.code||r.status)+'）：'+String(data.message||'请检查 seed-audio-1.0 服务权限与额度').slice(0,200));
-   if(typeof data.audio!=='string'||!data.audio.length||!/^[A-Za-z0-9+/=]+$/.test(data.audio))throw clapperError('音频模型未返回有效音频');
-   yield {type:'audio',index,data:data.audio};
-   yield {type:'round-end',index,seconds:data.duration,subtitle:data.subtitle};
-   yield {type:'usage',model:'seed-audio-1.0',usage:{original_duration:data.original_duration,duration:data.duration,requestId:r.headers.get('X-Tt-Logid')}};
-  }catch(e){if(controller.signal.aborted&&!signal?.aborted)throw clapperError('表演音频生成超时，请重试',504);throw e}finally{clearTimeout(timer);signal?.removeEventListener('abort',abort)}
+  const body=clapperAudioRequest(segment,(session?.start||0)+index,session?.total||segments.length,profile,style);
+  if(session){body.references=session.references;body.text_prompt='参考音频中的唯一讲述者就是本期演员。严格保持参考音色、发声位置、口音与年龄感；文字描述只控制表演。只讲下方新正文，不复述参考样本内容。\n'+body.text_prompt;}
+  const generate=()=>requestPerformanceAudio(env,body,signal);
+  const data=session?await session.cached(body,generate):await generate();
+  signal?.throwIfAborted();
+  yield {type:'audio',index,data:data.audio};
+  yield {type:'round-end',index,seconds:data.duration,subtitle:data.subtitle};
  }
 }

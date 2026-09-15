@@ -1,3 +1,4 @@
+import {createPerformanceStore} from '../server/performance-store.mjs';
 import http from 'node:http';
 import {Readable} from 'node:stream';
 import {WebSocketServer} from 'ws';
@@ -18,7 +19,7 @@ function request(req, signal) {
   headers.set('oai-authenticated-user-id', identity.owner);
   return {identity, req: new Request(url, {method:req.method,headers,signal,...(!['GET','HEAD'].includes(req.method)?{body:Readable.toWeb(req),duplex:'half'}:{})})};
 }
-const env = () => ({...process.env, PUBLIC_DEPLOYMENT:true, VOICE_CONNECT:nodeVoiceConnect, VOICE_FETCH:fetch, FETCH:fetch});
+const env = () => ({...process.env, PERFORMANCE_STORE:createPerformanceStore(process.env), PUBLIC_DEPLOYMENT:true, VOICE_CONNECT:nodeVoiceConnect, VOICE_FETCH:fetch, FETCH:fetch});
 const server = http.createServer(async (incoming, res) => {
   const controller = new AbortController();
   res.on('close', () => {if (!res.writableEnded) controller.abort();});

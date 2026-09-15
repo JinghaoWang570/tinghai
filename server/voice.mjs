@@ -42,8 +42,8 @@ export async function transcribePcm(env,pcm,signal){
  }finally{clearTimeout(timer);signal?.removeEventListener('abort',close);close()}
 }
 export function validateDuoVoices(voices){if(!Array.isArray(voices)||voices.length!==2||voices[0]===voices[1]||voices.some(id=>!VOICES.some(v=>v.id===id)))throw voiceError('请选择两位主持人的有效音色',400);return voices;}
-export async function* episodeVoice(env,segments,style,voice,signal,duoVoices,clapperVoice){
- if(['first','story','clapper'].includes(style)){yield* clapperAudio(env,segments,signal,clapperVoice,style);return;}
+export async function* episodeVoice(env,segments,style,voice,signal,duoVoices,clapperVoice,performanceSession){
+ if(['first','story','clapper'].includes(style)){yield* clapperAudio(env,segments,signal,clapperVoice,style,performanceSession);return;}
  if(style==='duo'){yield* podcastAudio(env,segments,signal,duoVoices?validateDuoVoices(duoVoices):podcastVoices);return;}
  for(let i=0;i<segments.length;i++){if(signal.aborted)throw voiceError('生成已取消');yield {type:'round',index:i};const speaker=style==='duo'?VOICES[segments[i].speaker==='B'?1:0].id:voice;for await(const event of ttsAudio(env,segments[i].text,speaker,signal))yield {...event,index:i};yield {type:'round-end',index:i}}
 }
