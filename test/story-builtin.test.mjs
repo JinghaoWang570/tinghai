@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {episodeScriptTask} from '../server/host-prompts.mjs';
 import {addStoryOpening} from '../server/story.mjs';
 import {ensurePerformanceProfile,loadPerformanceProfile} from '../server/performance-profile.mjs';
-import {BUILTIN_CLAPPER} from '../server/builtin-voices.mjs';
+import {BUILTIN_CLAPPER,BUILTIN_STORY} from '../server/builtin-voices.mjs';
 import {api,seal,unseal} from '../server/app.mjs';
 test('story opening precedes speech and allows sparse performance actions without contradictory TTS rules',()=>{
  const task=episodeScriptTask({query:'茶香',answer:'茶叶有香气。'},'story','short');assert.match(task,/茶香/);assert.match(task,/四句七言/);assert.match(task,/拍醒木/);assert.doesNotMatch(task,/只合成人声|不使用括号表演标记/);
@@ -21,4 +21,10 @@ test('new clapper scripts bind approved preset in signed context',async()=>{
  const context=await seal({answer:'正文',query:'主题',references:[]},env.ZHIHU_ACCESS_SECRET,'local-preview');
  const r=await api(new Request('https://test/api/script',{method:'POST',body:JSON.stringify({context,style:'clapper',clapperVoice:'另一个声音'})}),env);assert.equal(r.status,200);
  const ctx=await unseal((await r.json()).context,env.ZHIHU_ACCESS_SECRET,'local-preview');assert.equal(ctx.voicePreset,'clapper-v1');assert.equal(ctx.clapperVoice,BUILTIN_CLAPPER.description);
+});
+
+test('approved story voice is reused exactly across episodes without generation',async()=>{
+ const rows=new Map(),env={PERFORMANCE_STORE:{read:async k=>rows.get(k),create:async(k,v)=>{rows.set(k,v);return v}},VOICE_FETCH:()=>{throw Error('must not generate')}};
+ for(const n of [1,2]){const ctx={style:'story',voicePreset:'story-v1',voiceRevision:String(n),script:[{text:'本期故事'+n}]};ctx.voiceProfile=await ensurePerformanceProfile(env,ctx,'owner'+n);assert.equal(ctx.voiceProfile.mode,'builtin');assert.equal((await loadPerformanceProfile(env,ctx,'owner'+n)).references[0].audio_data,BUILTIN_STORY.audio)}
+ assert.equal(rows.size,1);
 });

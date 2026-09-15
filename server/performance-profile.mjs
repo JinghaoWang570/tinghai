@@ -1,4 +1,4 @@
-import {BUILTIN_CLAPPER} from './builtin-voices.mjs';
+import {BUILTIN_VOICES} from './builtin-voices.mjs';
 import {PERFORMANCE_VOICES, requestPerformanceAudio} from './clapper.mjs';
 
 export const isPerformance = style => ['first','story','clapper'].includes(style);
@@ -6,8 +6,9 @@ const profileHash = async value => Array.from(new Uint8Array(await crypto.subtle
 const failure = message => Object.assign(Error(message), {status:503, code:'VOICE_ERROR'});
 // A version is immutable: changing script/description creates a different identity.
 export async function performanceProfile(ctx, owner) {
- const preset=ctx.voicePreset==='clapper-v1'&&ctx.style==='clapper'?'clapper-v1':undefined;
- const description = preset?BUILTIN_CLAPPER.description:String(ctx.clapperVoice || PERFORMANCE_VOICES[ctx.style]).slice(0,240);
+ const builtin=BUILTIN_VOICES[ctx.style];
+ const preset=builtin&&builtin.id===ctx.voicePreset?builtin.id:undefined;
+ const description = preset?builtin.description:String(ctx.clapperVoice || PERFORMANCE_VOICES[ctx.style]).slice(0,240);
  return {version:1, id:await profileHash([owner,ctx.voiceRevision || 'legacy',ctx.style,ctx.script,description,...(preset?[preset]:[])]),
   model:'seed-audio-1.0', style:ctx.style, description, mode:preset?'builtin':'reference',...(preset?{preset}:{})};
 }
@@ -19,7 +20,7 @@ export async function ensurePerformanceProfile(env,ctx,owner,signal){
  const found=await store.read(key);
  if(ctx.voiceProfile && (!found || ctx.voiceProfile.sampleHash!==found.sampleHash))throw failure('本期声音样本不可用，请稍后重试；不会自动更换声音');
  if(found)return {...profile,sampleHash:found.sampleHash};
- if(profile.preset){const sample={audio:BUILTIN_CLAPPER.audio,sampleHash:await profileHash(BUILTIN_CLAPPER.audio),seconds:BUILTIN_CLAPPER.seconds};const saved=await store.create(key,sample);if(!saved)throw failure('内置声音保存失败，请重试');return {...profile,sampleHash:saved.sampleHash};}
+ if(profile.preset){const builtin=BUILTIN_VOICES[profile.style];const sample={audio:builtin.audio,sampleHash:await profileHash(builtin.audio),seconds:builtin.seconds};const saved=await store.create(key,sample);if(!saved)throw failure('内置声音保存失败，请重试');return {...profile,sampleHash:saved.sampleHash};}
  // Coalesce only within the same storage instance/production account. Persistence resolves cross-instance races.
  const lock=key+':'+await profileHash([env.TINGHAI_DATA_DIR,env.BLOB_READ_WRITE_TOKEN,!!env.LOCAL_DEV]);
  if(inFlight.has(lock))return inFlight.get(lock);
