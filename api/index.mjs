@@ -1,4 +1,3 @@
-import {loginGate,protectedPage} from '../server/login-gate.mjs';
 import {createPerformanceStore} from '../server/performance-store.mjs';
 import http from 'node:http';
 import {Readable} from 'node:stream';
@@ -12,8 +11,7 @@ import {cloudOAuthEnv} from '../server/cloud-oauth.mjs';
 function request(req, signal) {
   const url = new URL(req.url, 'https://' + req.headers.host);
   const route = url.searchParams.get('route');
-  if (['/','/index.html','/desktop-frame.html','/shared.html'].includes(route)) {url.pathname=route;url.searchParams.delete('route');}
-  if (route && /^\/(api|auth|__local|audio|data)\//.test(route)) {url.pathname = route; url.searchParams.delete('route');}
+  if (route && /^\/(api|auth|__local)\//.test(route)) {url.pathname = route; url.searchParams.delete('route');}
   const headers = new Headers();
   for (const [key, value] of Object.entries(req.headers)) if (value) headers.set(key, String(value));
   headers.delete('oai-authenticated-user-id');
@@ -30,7 +28,7 @@ const server = http.createServer(async (incoming, res) => {
     const {identity, req} = request(incoming, controller.signal);
     if (req.headers.get('origin') && req.headers.get('origin') !== new URL(req.url).origin) {res.writeHead(403).end('Origin mismatch'); return;}
     const runtime = await cloudOAuthEnv(req,env(),identity.owner);
-    const response = loginGate(req,runtime) || await protectedPage(req) || (new URL(req.url).pathname === '/api/session' ? Response.json({ready:true}, {headers:{'Cache-Control':'no-store'}}) : await cloudStorage(req, runtime, identity.owner) || await api(req, runtime));
+    const response = new URL(req.url).pathname === '/api/session' ? Response.json({ready:true}, {headers:{'Cache-Control':'no-store'}}) : await cloudStorage(req, runtime, identity.owner) || await api(req, runtime);
     res.statusCode = response.status;
     for (const [key,value] of response.headers) if (key !== 'set-cookie') res.setHeader(key,value);
     const cookies = response.headers.getSetCookie();
@@ -45,10 +43,8 @@ server.on('upgrade', async (incoming,socket,head) => {
   try {
     const {req,identity} = request(incoming);
     if (identity.cookie) {socket.end('HTTP/1.1 401 Unauthorized\r\nConnection: close\r\n\r\n');return;}
-    const runtime=await cloudOAuthEnv(req,env(),identity.owner);
-    if(loginGate(req,runtime)){socket.end('HTTP/1.1 401 Unauthorized\r\nConnection: close\r\n\r\n');return;}
     const upgrade = attach => {wss.handleUpgrade(incoming,socket,head,ws=>{ws.binaryType='arraybuffer';attach(ws);});return new Response(null);};
-    const response = await api(req,{...runtime,ASR_UPGRADE:upgrade,DUPLEX_UPGRADE:upgrade});
+    const response = await api(req,{...await cloudOAuthEnv(req,env(),identity.owner),ASR_UPGRADE:upgrade,DUPLEX_UPGRADE:upgrade});
     if (response.status !== 200) socket.end(`HTTP/1.1 ${response.status} Error\r\nConnection: close\r\n\r\n`);
   } catch {socket.destroy();}
 });

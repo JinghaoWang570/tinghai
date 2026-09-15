@@ -53,5 +53,3 @@ Thumbs.db
 .vercel-static/
 
 !.env.example
-
-content/protected/

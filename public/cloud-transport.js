@@ -1,16 +1,7 @@
 // Cloud saves travel in small requests so long episodes also fit function limits.
 (() => {
   if (!window.__TINGHAI_CLOUD__) return;
-  const rawFetch = window.fetch.bind(window);
-  const original = async (...args) => {
-    const response=await rawFetch(...args);
-    if(response.status===401 && new URL(response.url || location.href).origin===location.origin){
-      document.documentElement.style.visibility='hidden';
-      document.querySelectorAll('audio,video').forEach(media=>media.pause());
-      window.top.location.replace('/auth/login');
-    }
-    return response;
-  };
+  const original = window.fetch.bind(window);
   const sessionReady = original('/api/session').then(r => {if (!r.ok) throw Error('云端服务尚未就绪，请稍后刷新');});
   sessionReady.catch(() => {});
   window.fetch = async (input, options = {}) => {
