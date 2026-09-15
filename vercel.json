@@ -9,10 +9,34 @@
   "functions": {
     "api/index.mjs": {
       "maxDuration": 300,
-      "includeFiles": "content/catalog/**"
+      "includeFiles": "content/**"
     }
   },
   "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/index?route=/"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/api/index?route=/index.html"
+    },
+    {
+      "source": "/desktop-frame.html",
+      "destination": "/api/index?route=/desktop-frame.html"
+    },
+    {
+      "source": "/shared.html",
+      "destination": "/api/index?route=/shared.html"
+    },
+    {
+      "source": "/audio/:path*",
+      "destination": "/api/index?route=/audio/:path*"
+    },
+    {
+      "source": "/data/:path*",
+      "destination": "/api/index?route=/data/:path*"
+    },
     {
       "source": "/api/:path*",
       "destination": "/api/index?route=/api/:path*"

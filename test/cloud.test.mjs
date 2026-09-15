@@ -1,3 +1,6 @@
+import os from 'node:os';
+import path from 'node:path';
+import {encryptSession} from '../server/cloud-oauth.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -58,13 +61,18 @@ test('cloud transport initializes identity once and never includes context in sh
   assert.equal(calls.filter(x=>x==='/api/session').length,1);
 });
 test('Node deployment adapter ignores client identity headers and seals catalog for its own cookie',async()=>{
+  const oldDir=process.env.TINGHAI_DATA_DIR;const dir=await fs.mkdtemp(path.join(os.tmpdir(),'tinghai-auth-'));process.env.TINGHAI_DATA_DIR=dir;
+  const id=crypto.randomUUID();await fs.mkdir(path.join(dir,'oauth'));await fs.writeFile(path.join(dir,'oauth',id+'.json'),encryptSession({id,accessToken:'fixture',expiresAt:Date.now()+60000},'adapter-test'));
   const old=process.env.ZHIHU_ACCESS_SECRET;process.env.ZHIHU_ACCESS_SECRET='adapter-test';
   const {default:server}=await import('../api/index.mjs');
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   try{
     const base='http://127.0.0.1:'+server.address().port;
     const session=await fetch(base+'/api/index?route=/api/session');
-    const cookie=session.headers.get('set-cookie').split(';')[0];
+    assert.equal(session.status,401);
+    const anonymous=session.headers.get('set-cookie').split(';')[0];
+    const denied=await fetch(base+'/api/index?route=/__local/catalog/cat-box',{headers:{cookie:anonymous}});assert.equal(denied.status,401);
+    const cookie=anonymous+'; tinghai_zhihu_session='+id;
     const owner=visitor(cookie,'adapter-test').owner;
     const file=(await fs.readdir(new URL('../content/catalog/',import.meta.url)))[0].replace('.json','');
     const result=await fetch(base+'/api/index?route=/__local/catalog/'+file,{headers:{cookie,'oai-authenticated-user-id':'attacker'}});
@@ -74,5 +82,5 @@ test('Node deployment adapter ignores client identity headers and seals catalog 
     await assert.rejects(unseal(data.episode.context,'adapter-test','attacker'));
     const foreign=await fetch(base+'/api/index?route=/api/session',{headers:{origin:'https://evil.example'}});
     assert.equal(foreign.status,403);
-  }finally{await new Promise(resolve=>server.close(resolve));if(old===undefined)delete process.env.ZHIHU_ACCESS_SECRET;else process.env.ZHIHU_ACCESS_SECRET=old;}
+  }finally{await new Promise(resolve=>server.close(resolve));await fs.rm(dir,{recursive:true,force:true});if(oldDir===undefined)delete process.env.TINGHAI_DATA_DIR;else process.env.TINGHAI_DATA_DIR=oldDir;if(old===undefined)delete process.env.ZHIHU_ACCESS_SECRET;else process.env.ZHIHU_ACCESS_SECRET=old;}
 });

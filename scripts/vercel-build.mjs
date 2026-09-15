@@ -12,4 +12,11 @@ for (const name of ['index.html', 'shared.html']) {
   for(const match of assets){const bytes=await fs.readFile(path.join(output,match[1]));const version=createHash('sha256').update(bytes).digest('hex').slice(0,12);text=text.replaceAll('"'+match[1]+'"','"'+match[1]+'?v='+version+'"')}
   await fs.writeFile(file, text);
 }
+const protectedRoot=path.resolve('content/protected');
+await fs.rm(protectedRoot,{recursive:true,force:true});
+await fs.mkdir(protectedRoot,{recursive:true});
+for(const name of ['index.html','desktop-frame.html','shared.html','audio','data']) {
+ await fs.cp(path.join(output,name),path.join(protectedRoot,name),{recursive:true});
+ await fs.rm(path.join(output,name),{recursive:true,force:true});
+}
 console.log('Vercel static assets prepared; local diagnostics and credentials excluded.');
