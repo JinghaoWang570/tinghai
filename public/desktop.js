@@ -19,6 +19,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-desktop-ca
 const performanceDefaults={first:'年轻讲述者，声音温暖自然，用第一人称角色化讲述，语气细腻、有亲近感。',story:'沉稳的评书演员，声音浑厚清晰，抑扬顿挫，悬念处稍作停顿，叙事有画面感。',clapper:'中年男性快板演员，声音洪亮有力，吐字清晰，亲切幽默，有传统曲艺韵味。'};
 function performanceDescription(){return state.performanceDescriptions?.[state.style]||performanceDefaults[state.style]||''}
 function clapperVoiceSelection(){
+ if(state.style==='first'&&typeof firstPersonVoiceSelection==='function')return firstPersonVoiceSelection();
  const fixed={story:{id:'story-v1',name:'沉稳评书',file:'story-fixed-v1.mp3'},clapper:{id:'clapper-v1',name:'明快快板',file:'clapper-fixed-v1.mp3'}}[state.style];
  if(fixed)return '<div class="setting clapper-voice"><label for="performance-preset">音色</label><select id="performance-preset" aria-label="音色"><option value="'+fixed.id+'">'+fixed.name+'</option></select><audio controls preload="none" aria-label="试听'+fixed.name+'" src="/audio/voices/'+fixed.file+'" style="width:100%;margin-top:12px"></audio></div>';
  return '<div class="setting clapper-voice"><label for="performance-description">声音与表演描述</label><textarea id="performance-description" maxlength="240" rows="3" placeholder="描述声音、语气与表演方式">'+esc(performanceDescription())+'</textarea><p class="micro">用文字定义这期节目的讲述方式</p></div>';

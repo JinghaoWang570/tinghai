@@ -1,11 +1,18 @@
 export function narratorTask(ctx) {
-  return `为这个主题选择一位第一人称讲述角色。先检测材料涉及的人、动物或物体，优先选择与事件直接相关、能够解释核心问题的人；没有合适的人时选择核心动物或物体进行拟人化。不要为了优先人而添加材料中不存在的人物。分析角色身份、处境和表达气质，设计原创音色，不模仿真人声音、不臆造真实年龄性别或亲身经历。只返回JSON：{"name":"角色名称","kind":"person或animal或object","perspective":"以我的身份如何解释主题，100字以内","voiceDescription":"可直接用于声音合成的音色描述，描述音高、音质、语速、情绪和口吻，30至180字"}。\n主题：${ctx.query}\n内容：${ctx.answer?.slice(0,8000)||''}`;
+  return `为这个主题选择一位第一人称讲述角色。先检测材料涉及的人、动物或物体，优先选择与事件直接相关、能够解释核心问题的人；没有合适的人时选择核心动物或物体进行拟人化。不要为了优先人而添加材料中不存在的人物。分析角色身份、处境和表达气质，识别角色性别与年龄段，不臆造真实年龄性别或亲身经历。gender只能为male、female、unknown；ageGroup只能为young、adult、senior、unknown，按故事发生时的年龄，不按人物去世年龄。性别以材料明确表述为优先；材料确指苏轼等身份唯一且性别为公认传记事实的知名人物时，可使用established_identity；同名不明、普通姓名、职业、性格都不能用来猜性别，不得把材料中其他人的性别或代词归给当前角色。genderBasis只能为explicit、established_identity、unknown，genderEvidence引用材料中支持判断的原文；公认人物写出其姓名及身份依据。无可靠依据必须unknown。年龄不明确填unknown，后续默认成熟声音。动物或物品无明确性别时填unknown。只返回JSON：{"name":"角色名称","kind":"person或animal或object","perspective":"以我的身份如何解释主题，100字以内","voiceDescription":"简短表达气质描述","gender":"male或female或unknown","genderBasis":"explicit或established_identity或unknown","genderEvidence":"判断依据或空字符串","ageGroup":"young或adult或senior或unknown"}。\n主题：${ctx.query}\n内容：${ctx.answer?.slice(0,8000)||''}`;
 }
-export function parseNarrator(raw) {
+export function parseNarrator(raw,ctx) {
   let value;
   try { value=JSON.parse(raw.trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'')); } catch { throw new Error('角色分析格式不完整，请重试'); }
   if(!value||!['person','animal','object'].includes(value.kind)||!['name','perspective','voiceDescription'].every(k=>typeof value[k]==='string'&&value[k].trim()))throw new Error('角色分析格式不完整，请重试');
-  return {name:value.name.trim().slice(0,60),kind:value.kind,perspective:value.perspective.trim().slice(0,300),voiceDescription:value.voiceDescription.trim().slice(0,240)};
+  let gender=['male','female'].includes(value.gender)?value.gender:'unknown';
+  const basis=['explicit','established_identity'].includes(value.genderBasis)?value.genderBasis:'unknown';
+  const evidence=typeof value.genderEvidence==='string'?value.genderEvidence.trim().slice(0,300):'';
+  if(basis==='unknown'||!evidence)gender='unknown';
+  if(ctx&&basis==='explicit'&&!([ctx.query,ctx.answer,...(ctx.references||[]).map(r=>r.text)].join('\n').includes(evidence)))gender='unknown';
+  if(ctx&&basis==='established_identity'&&(![ctx.query,ctx.answer,...(ctx.references||[]).map(r=>r.text)].join('\n').includes(value.name.trim())||!evidence.includes(value.name.trim())))gender='unknown';
+  const ageGroup=['young','adult','senior'].includes(value.ageGroup)?value.ageGroup:'unknown';
+  return {gender,genderBasis:gender==='unknown'?'unknown':basis,genderEvidence:evidence,ageGroup,name:value.name.trim().slice(0,60),kind:value.kind,perspective:value.perspective.trim().slice(0,300),voiceDescription:value.voiceDescription.trim().slice(0,240)};
 }
 export function narratorDirection(narrator) {
   if(!narrator)throw new Error('请先完成第一人称角色分析');
