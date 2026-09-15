@@ -14,13 +14,14 @@
           "ready": true,
           "sourceCount": 6,
           "style": "双人播客",
-          "createdAt": "2026-09-14T15:44:24.475Z",
+          "createdAt": "2026-09-15T03:53:39.892Z",
           "subtitle": "从产地、烘焙到杯中的酸甜苦",
-          "durationSeconds": 170,
+          "durationSeconds": 172,
           "coverImage": "/assets/cover-coffee-3d0ec905af.webp",
           "coverSource": "https://www.gafei.com/kafeibiji-21066",
           "coverSourceTitle": "精品咖啡学 真正的咖啡醇香味到底从哪里来? 咖啡网  09月01日更新",
-          "coverOriginal": "https://www.gafei.com/uploads/allimg/141228/16032C149-0.jpg"
+          "coverOriginal": "https://www.gafei.com/uploads/allimg/141228/16032C149-0.jpg",
+          "revision": "featured-v2"
         },
         {
           "id": "photography",
@@ -29,14 +30,15 @@
           "coverText": "光线\n胜过器材",
           "ready": true,
           "sourceCount": 6,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:44:22.042Z",
+          "style": "单人讲解",
+          "createdAt": "2026-09-15T03:53:41.988Z",
           "subtitle": "读懂光线，再谈构图和器材",
-          "durationSeconds": 151,
+          "durationSeconds": 210,
           "coverImage": "/assets/cover-photography-9e62be8d3a.webp",
           "coverSource": "https://post.smzdm.com/p/a03dk25z/",
           "coverSourceTitle": "手机拍的照片凭啥拿国际大奖?评委说出了创意真相_影像_什么值得买",
-          "coverOriginal": "https://a.zdmimg.com/202608/20/6a865f761f6cd2888.jpg_fo742.jpg"
+          "coverOriginal": "https://a.zdmimg.com/202608/20/6a865f761f6cd2888.jpg_fo742.jpg",
+          "revision": "featured-v2"
         },
         {
           "id": "music",
@@ -46,13 +48,14 @@
           "ready": true,
           "sourceCount": 8,
           "style": "双人播客",
-          "createdAt": "2026-09-14T15:44:52.623Z",
+          "createdAt": "2026-09-15T03:53:43.243Z",
           "subtitle": "旋律如何牵动期待与情绪",
-          "durationSeconds": 201,
+          "durationSeconds": 176,
           "coverImage": "/assets/cover-music-2869ababb6.webp",
           "coverSource": "https://m.thepaper.cn/newsDetail_forward_33077448",
           "coverSourceTitle": "青浦卫健说 | 大脑单曲循环之谜:为什么你的脑子关不掉那首歌?",
-          "coverOriginal": "https://imgpai.thepaper.cn/pphimage/20260429/e2654436-9577-4450-80e3-0d7a090038d9.jpg"
+          "coverOriginal": "https://imgpai.thepaper.cn/pphimage/20260429/e2654436-9577-4450-80e3-0d7a090038d9.jpg",
+          "revision": "featured-v2"
         }
       ]
     },
@@ -69,10 +72,11 @@
           "coverText": "宋人\n下班以后",
           "ready": true,
           "sourceCount": 8,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:44:47.410Z",
+          "style": "评书",
+          "createdAt": "2026-09-15T03:53:49.446Z",
           "subtitle": "在夜市与瓦舍，走进宋人的日常",
-          "durationSeconds": 141
+          "durationSeconds": 241,
+          "revision": "featured-v2"
         },
         {
           "id": "silk-road",
@@ -81,10 +85,11 @@
           "coverText": "不只有\n丝绸",
           "ready": true,
           "sourceCount": 7,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:45:15.855Z",
+          "style": "评书",
+          "createdAt": "2026-09-15T03:53:53.176Z",
           "subtitle": "商品之外，还有技术与文化的远行",
-          "durationSeconds": 187
+          "durationSeconds": 180,
+          "revision": "featured-v2"
         },
         {
           "id": "museum",
@@ -92,11 +97,12 @@
           "query": "普通人逛博物馆如何看懂文物？从材料、用途和时代背景理解文物的方法是什么？",
           "coverText": "文物\n会说话",
           "ready": true,
-          "sourceCount": 5,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:45:21.618Z",
+          "sourceCount": 6,
+          "style": "第一人称",
+          "createdAt": "2026-09-15T03:53:53.670Z",
           "subtitle": "从材料和用途，听懂文物的故事",
-          "durationSeconds": 171
+          "durationSeconds": 162,
+          "revision": "featured-v2"
         }
       ]
     },
@@ -114,9 +120,10 @@
           "ready": true,
           "sourceCount": 4,
           "style": "双人播客",
-          "createdAt": "2026-09-14T15:46:01.675Z",
+          "createdAt": "2026-09-15T03:53:54.383Z",
           "subtitle": "流畅的答案，为什么未必可靠",
-          "durationSeconds": 216
+          "durationSeconds": 136,
+          "revision": "featured-v2"
         },
         {
           "id": "gps",
@@ -125,10 +132,11 @@
           "coverText": "你在\n这里",
           "ready": true,
           "sourceCount": 5,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:48:49.927Z",
+          "style": "单人讲解",
+          "createdAt": "2026-09-15T03:53:55.786Z",
           "subtitle": "卫星、基站与 Wi-Fi 的定位协作",
-          "durationSeconds": 178
+          "durationSeconds": 197,
+          "revision": "featured-v2"
         },
         {
           "id": "noise-cancel",
@@ -137,14 +145,15 @@
           "coverText": "安静的\n另一面",
           "ready": true,
           "sourceCount": 5,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:46:09.058Z",
+          "style": "单人讲解",
+          "createdAt": "2026-09-15T03:53:56.990Z",
           "subtitle": "抵消噪声，也有做不到的地方",
-          "durationSeconds": 141,
+          "durationSeconds": 156,
           "coverImage": "/assets/cover-noise-cancel-c4432f2d04.webp",
           "coverSource": "https://post.smzdm.com/p/ae6vxwez/",
           "coverSourceTitle": "半年9条知乎提问都在问同一件事:两千块的降噪耳机,隔不掉同事说话:买\"工位清净\"前,先让工位答3个问题_耳机_什么值得买",
-          "coverOriginal": "https://a.zdmimg.com/202609/10/6aa18a8a69b244508.png_fo742.jpg"
+          "coverOriginal": "https://a.zdmimg.com/202609/10/6aa18a8a69b244508.png_fo742.jpg",
+          "revision": "featured-v2"
         }
       ]
     },
@@ -161,14 +170,15 @@
           "coverText": "冰箱里\n的秩序",
           "ready": true,
           "sourceCount": 8,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:46:32.956Z",
+          "style": "快板",
+          "createdAt": "2026-09-15T03:53:57.236Z",
           "subtitle": "生熟、温区与水分的存放讲究",
-          "durationSeconds": 125,
+          "durationSeconds": 58,
           "coverImage": "/assets/cover-fridge-6c6824a636.webp",
           "coverSource": "https://www.kepuchina.cn/article/articleinfo?ar_id=646584&business_type=100&classify=0",
           "coverSourceTitle": "冰箱不是万能箱!食物存放位置图鉴",
-          "coverOriginal": "https://pqnoss.kepuchina.cn/kepuyun/2025/10/31/17/1761813185889.jpg"
+          "coverOriginal": "https://pqnoss.kepuchina.cn/kepuyun/2025/10/31/17/1761813185889.jpg",
+          "revision": "featured-v2"
         },
         {
           "id": "declutter",
@@ -177,10 +187,11 @@
           "coverText": "给生活\n留点空",
           "ready": true,
           "sourceCount": 6,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:46:48.479Z",
+          "style": "快板",
+          "createdAt": "2026-09-15T03:53:57.452Z",
           "subtitle": "让物品归位，比收纳技巧更重要",
-          "durationSeconds": 162
+          "durationSeconds": 66,
+          "revision": "featured-v2"
         },
         {
           "id": "procrastination",
@@ -190,9 +201,10 @@
           "ready": true,
           "sourceCount": 6,
           "style": "双人播客",
-          "createdAt": "2026-09-14T15:47:13.579Z",
+          "createdAt": "2026-09-15T03:53:58.067Z",
           "subtitle": "从情绪和任务拆分，找到起步点",
-          "durationSeconds": 181
+          "durationSeconds": 124,
+          "revision": "featured-v2"
         }
       ]
     },
@@ -209,10 +221,11 @@
           "coverText": "天空\n调色盘",
           "ready": true,
           "sourceCount": 7,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:47:24.032Z",
+          "style": "单人讲解",
+          "createdAt": "2026-09-15T03:53:59.489Z",
           "subtitle": "从蓝天到晚霞，听懂光的散射",
-          "durationSeconds": 155
+          "durationSeconds": 190,
+          "revision": "featured-v2"
         },
         {
           "id": "cat-box",
@@ -221,14 +234,15 @@
           "coverText": "猫与\n一只纸箱",
           "ready": true,
           "sourceCount": 6,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:47:49.382Z",
+          "style": "第一人称",
+          "createdAt": "2026-09-15T03:54:03.558Z",
           "subtitle": "安全感、温度和狩猎本能",
-          "durationSeconds": 157,
+          "durationSeconds": 191,
           "coverImage": "/assets/cover-cat-box-ab0ed5610a.webp",
           "coverSource": "https://www.163.com/dy/article/L6GD1D5305562RFE.html",
           "coverSourceTitle": "猫咪为什么对纸箱情有独钟?科学解释来了|猫窝|猎手|纸板|玩具|毛绒|瓦楞纸_网易订阅",
-          "coverOriginal": "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0910%2Fddb0c382j00tl5hvz003id0013i00m8p.jpg&thumbnail=660x2147483647&quality=80&type=jpg"
+          "coverOriginal": "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0910%2Fddb0c382j00tl5hvz003id0013i00m8p.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+          "revision": "featured-v2"
         },
         {
           "id": "sea-wave",
@@ -237,10 +251,11 @@
           "coverText": "海浪\n去哪里",
           "ready": true,
           "sourceCount": 7,
-          "style": "双人播客",
-          "createdAt": "2026-09-14T15:48:03.788Z",
+          "style": "第一人称",
+          "createdAt": "2026-09-15T03:54:03.937Z",
           "subtitle": "分清波浪、潮汐和洋流",
-          "durationSeconds": 163
+          "durationSeconds": 114,
+          "revision": "featured-v2"
         }
       ]
     }
