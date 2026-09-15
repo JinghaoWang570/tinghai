@@ -40,12 +40,13 @@ ${segment.text}
  return {model:'seed-audio-1.0',text_prompt,audio_config:{format:'mp3',sample_rate:44100,speech_rate:-10,enable_subtitle:true}};
 }
 export async function requestPerformanceAudio(env,body,signal){
- if(!env.VOLC_API_KEY)throw clapperError('全要素音频服务尚未配置',503);
+ const apiKey=env.SEED_AUDIO_API_KEY||env.VOLC_API_KEY;
+ if(!apiKey)throw clapperError('全要素音频服务尚未配置',503);
  signal?.throwIfAborted();
  const controller=new AbortController(),abort=()=>controller.abort(signal?.reason);signal?.addEventListener('abort',abort,{once:true});
  const timer=setTimeout(()=>controller.abort(),240000);
  try{
-  const r=await (env.VOICE_FETCH||fetch)('https://openspeech.bytedance.com/api/v3/tts/create',{method:'POST',headers:{'Content-Type':'application/json','X-Api-Key':env.VOLC_API_KEY,'X-Api-Request-Id':crypto.randomUUID()},body:JSON.stringify(body),signal:controller.signal});
+  const r=await (env.VOICE_FETCH||fetch)('https://openspeech.bytedance.com/api/v3/tts/create',{method:'POST',headers:{'Content-Type':'application/json','X-Api-Key':apiKey,'X-Api-Request-Id':crypto.randomUUID()},body:JSON.stringify(body),signal:controller.signal});
   const data=await r.json();
   if(!r.ok||(data.code!=null&&![0,20000000].includes(data.code)))throw clapperError('表演音频生成失败（'+(data.code||r.status)+'），请重试或检查服务权限');
   if(typeof data.audio!=='string'||!data.audio.length||data.audio.length>24000000||!/^[A-Za-z0-9+/=]+$/.test(data.audio))throw clapperError('音频模型未返回有效音频');
