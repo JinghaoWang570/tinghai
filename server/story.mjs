@@ -1,4 +1,4 @@
-import {APIError} from './zhihu.mjs';
+import {APIError,parseScript} from './zhihu.mjs';
 export function storyScriptTask(ctx,depth){return `你是中文知识评书编剧。围绕本期题目与原回答，依据 reference_data 写完整的单人评书。事实准确，悬念服务内容，不编造史实或亲身经历。
 题目：${ctx.query||''}
 原回答：${String(ctx.answer||'').slice(0,14000)}
@@ -16,4 +16,13 @@ export function addStoryOpening(raw,result){
  result.openingPoem=lines;
  result.segments[0].text=lines.map((line,i)=>line+(i%2?'。':'，')).join('\n')+'\n'+result.segments[0].text;
  return result;
+}
+
+export async function generateStoryScript(generate,refs,signal){
+ for(let retry=0;retry<=3;retry++){
+  signal?.throwIfAborted();
+  const raw=await generate(retry?'上一版格式校验未通过。请重新生成完整JSON，openingPoem必须为四句，每句恰好七个汉字，segments必须包含非空正文。':'');
+  try{const result=parseScript(raw,refs,'story');if(result.style!=='story'||!result.segments.length)throw new APIError('讲稿格式错误',502,'INVALID_SCRIPT');return addStoryOpening(raw,result)}
+  catch(error){if(!['INVALID_STORY_POEM','INVALID_SCRIPT'].includes(error.code))throw error;if(retry===3)throw new APIError('出现未知问题，请重试。',502,'STORY_GENERATION_FAILED')}
+ }
 }
