@@ -16,12 +16,14 @@
           "style": "双人播客",
           "createdAt": "2026-09-15T03:53:39.892Z",
           "subtitle": "从产地、烘焙到杯中的酸甜苦",
-          "durationSeconds": 172,
+          "durationSeconds": 158,
           "coverImage": "/assets/cover-coffee-3d0ec905af.webp",
           "coverSource": "https://www.gafei.com/kafeibiji-21066",
           "coverSourceTitle": "精品咖啡学 真正的咖啡醇香味到底从哪里来? 咖啡网  09月01日更新",
           "coverOriginal": "https://www.gafei.com/uploads/allimg/141228/16032C149-0.jpg",
-          "revision": "featured-v2"
+          "revision": "featured-v2",
+          "updatedAt": "2026-09-15T08:37:02.626Z",
+          "editRevision": "boundary-cleanup-v1"
         },
         {
           "id": "photography",
@@ -33,12 +35,14 @@
           "style": "单人讲解",
           "createdAt": "2026-09-15T03:53:41.988Z",
           "subtitle": "读懂光线，再谈构图和器材",
-          "durationSeconds": 210,
+          "durationSeconds": 194,
           "coverImage": "/assets/cover-photography-9e62be8d3a.webp",
           "coverSource": "https://post.smzdm.com/p/a03dk25z/",
           "coverSourceTitle": "手机拍的照片凭啥拿国际大奖?评委说出了创意真相_影像_什么值得买",
           "coverOriginal": "https://a.zdmimg.com/202608/20/6a865f761f6cd2888.jpg_fo742.jpg",
-          "revision": "featured-v2"
+          "revision": "featured-v2",
+          "updatedAt": "2026-09-15T08:37:02.749Z",
+          "editRevision": "boundary-cleanup-v1"
         },
         {
           "id": "music",
@@ -50,12 +54,14 @@
           "style": "双人播客",
           "createdAt": "2026-09-15T03:53:43.243Z",
           "subtitle": "旋律如何牵动期待与情绪",
-          "durationSeconds": 176,
+          "durationSeconds": 174,
           "coverImage": "/assets/cover-music-2869ababb6.webp",
           "coverSource": "https://m.thepaper.cn/newsDetail_forward_33077448",
           "coverSourceTitle": "青浦卫健说 | 大脑单曲循环之谜:为什么你的脑子关不掉那首歌?",
           "coverOriginal": "https://imgpai.thepaper.cn/pphimage/20260429/e2654436-9577-4450-80e3-0d7a090038d9.jpg",
-          "revision": "featured-v2"
+          "revision": "featured-v2",
+          "updatedAt": "2026-09-15T08:37:02.933Z",
+          "editRevision": "boundary-cleanup-v1"
         }
       ]
     },
@@ -135,8 +141,10 @@
           "style": "单人讲解",
           "createdAt": "2026-09-15T03:53:55.786Z",
           "subtitle": "卫星、基站与 Wi-Fi 的定位协作",
-          "durationSeconds": 197,
-          "revision": "featured-v2"
+          "durationSeconds": 196,
+          "revision": "featured-v2",
+          "updatedAt": "2026-09-15T08:37:03.300Z",
+          "editRevision": "boundary-cleanup-v1"
         },
         {
           "id": "noise-cancel",
@@ -224,8 +232,10 @@
           "style": "单人讲解",
           "createdAt": "2026-09-15T03:53:59.489Z",
           "subtitle": "从蓝天到晚霞，听懂光的散射",
-          "durationSeconds": 190,
-          "revision": "featured-v2"
+          "durationSeconds": 189,
+          "revision": "featured-v2",
+          "updatedAt": "2026-09-15T08:37:03.105Z",
+          "editRevision": "boundary-cleanup-v1"
         },
         {
           "id": "cat-box",
