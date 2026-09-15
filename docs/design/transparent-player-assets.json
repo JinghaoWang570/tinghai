@@ -1,0 +1,11 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Remove only the white background; preserve the opaque mascot, original pose, accessories, foreground props, colors, framing and scale. Genuine transparent alpha including gaps. Clean edges, no white backdrop, no painted checkerboard, no new text.",
+  "updates": {
+    "/assets/kanshan-style-first-b4f63aaa5f.webp": "/assets/kanshan-style-first-transparent-61eb69eba8.webp",
+    "/assets/kanshan-style-story-4b19c51d14.webp": "/assets/kanshan-style-story-transparent-34d82b59ea.webp",
+    "/assets/kanshan-style-clapper-2187aa9aa0.webp": "/assets/kanshan-style-clapper-transparent-435cdd860c.webp",
+    "/assets/kanshan-player-duo-clean-e07a2497d7.webp": "/assets/kanshan-player-duo-clean-transparent-3fcf5a6c7f.webp"
+  },
+  "duoPrompt": "Remove only the cyan background; retain both opaque white mascots and microphone, exact pose and composition. Real transparent alpha in all background gaps."
+}
